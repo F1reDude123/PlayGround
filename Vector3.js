@@ -35,24 +35,24 @@ export default class Vector3 {
     return this;
   }
   rotateX(angle) {
-    var y = this.y;
-    var z = this.z;
+    const y = this.y;
+    const z = this.z;
     this.y = y * Math.cos(angle) - z * Math.sin(angle);
     this.z = y * Math.sin(angle) + z * Math.cos(angle);
     return this;
   }
   
   rotateY(angle) {
-    var x = this.x;
-    var z = this.z;
+    const x = this.x;
+    const z = this.z;
     this.x = x * Math.cos(angle) + z * Math.sin(angle);
     this.z = -x * Math.sin(angle) + z * Math.cos(angle);
     return this;
   }
   
   rotateZ(angle) {
-    var x = this.x;
-    var y = this.y;
+    const x = this.x;
+    const y = this.y;
     this.x = x * Math.cos(angle) - y * Math.sin(angle);
     this.y = x * Math.sin(angle) + y * Math.cos(angle);
     return this;
