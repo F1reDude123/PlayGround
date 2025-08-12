@@ -14,7 +14,7 @@ export default class Scene {
     this.draw();
   }
   project(x) {
-    return new Vector2(x.x/x.z+this.canvas.width/2, x.y/x.z+this.canvas.height/2);
+    return new Vector2(x.x/x.z+this.canvas.width/2, x.y/x.z-this.canvas.height/2);
   }
   polygon(x, y, z) {
     this.objects.push(new Polygon(this.project(x), this.project(y), this.project(z)));
