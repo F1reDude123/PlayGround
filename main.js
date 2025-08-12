@@ -2,7 +2,7 @@ import Vector3 from "https://f1redude123.github.io/PlayGround/Vector3.js";
 import Vector2 from "https://f1redude123.github.io/PlayGround/Vector2.js";
 import Transform from "https://f1redude123.github.io/PlayGround/Transform.js";
 import Polygon from "https://f1redude123.github.io/PlayGround/Polygon.js";
-class Scene {
+export default class Scene {
   objects = [];
   constructor(width = null, height = null) {
     this.canvas = document.createElement("canvas");
