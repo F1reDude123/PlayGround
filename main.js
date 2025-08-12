@@ -7,17 +7,17 @@ export default class Scene {
   constructor(width = null, height = null) {
     this.canvas = document.createElement("canvas");
     this.canvas.width = width || window.innerWidth;
-    this.canvas.height = width || window.innerHeight;
+    this.canvas.height = height || window.innerHeight;
     this.ctx = this.canvas.getContext("2d");
     this.cam = new Transform(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0));
     document.body.appendChild(this.canvas);
     this.draw();
   }
-  #project(x) {
-    return new Vector2(x.x/x.z, x.y/x.z);
+  project(x) {
+    return new Vector2(x.x/x.z+this.canvas.width/2, x.y/x.z+this.canvas.height/2);
   }
   polygon(x, y, z) {
-    this.objects.push(new Polygon(this.#project(x), this.#project(y), this.#project(z)));
+    this.objects.push(new Polygon(this.project(x), this.project(y), this.project(z)));
   }
   plane(pos, scale) {
     this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z-scale.z/2), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2), new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2));
@@ -31,6 +31,7 @@ export default class Scene {
       this.ctx.lineTo(e.p2.x, e.p2.y);
       this.ctx.lineTo(e.p3.x, e.p3.y);
       this.ctx.lineTo(e.p1.x, e.p1.y);
+      this.ctx.closePath();
       this.ctx.fillStyle = "#000";
       this.ctx.fill();
     });
