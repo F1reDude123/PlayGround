@@ -1,0 +1,38 @@
+import Vector3 from "https://f1redude123.github.io/PlayGround/Vector3.js";
+import Vector2 from "https://f1redude123.github.io/PlayGround/Vector2.js";
+import Transform from "https://f1redude123.github.io/PlayGround/Transform.js";
+import Polygon from "https://f1redude123.github.io/PlayGround/Polygon.js";
+class Scene {
+  objects = [];
+  constructor(width = null, height = null) {
+    this.canvas = document.createElement("canvas");
+    this.canvas.width = width || window.innerWidth;
+    this.canvas.height = width || window.innerHeight;
+    this.ctx = this.canvas.getContext("2d");
+    this.cam = new Transform(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0));
+    document.body.appendChild(this.canvas);
+    this.draw();
+  }
+  #project(x) {
+    return new Vector2(x.x/x.z, x.y/x.z);
+  }
+  polygon(x, y, z) {
+    this.objects.push(new Polygon(this.#project(x), this.#project(y), this.#project(z)));
+  }
+  plane(pos, scale) {
+    this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z-scale.z/2), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2), new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2));
+    this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2), new Vector3(pos.x+scale.x/2, pos.y, pos.z+scale.z/2));
+  }
+  draw() {
+    this.objects.forEach(e => {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.beginPath();
+      this.ctx.moveTo(e.p1.x, e.p1.y);
+      this.ctx.lineTo(e.p2.x, e.p2.y);
+      this.ctx.lineTo(e.p3.x, e.p3.y);
+      this.ctx.lineTo(e.p1.x, e.p1.y);
+      this.ctx.fill();
+      requestAnimationFrame(()=>this.draw());
+    });
+  }
+}
