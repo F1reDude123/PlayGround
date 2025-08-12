@@ -20,8 +20,8 @@ export default class Scene {
     this.objects.push(new Polygon(this.project(x), this.project(y), this.project(z)));
   }
   plane(pos, rot, scale) {
-    this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z-scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z), new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z));
-    this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z), new Vector3(pos.x+scale.x/2, pos.y, pos.z+scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z));
+    this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z-scale.z/2).rotate(rot), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2).rotate(rot), new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2).rotate(rot));
+    this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2).rotate(rot), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2).rotate(rot), new Vector3(pos.x+scale.x/2, pos.y, pos.z+scale.z/2).rotate(rot));
   }
   degToRad(x) {
     return x*(Math.PI/180);
