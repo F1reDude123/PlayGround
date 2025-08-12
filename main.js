@@ -19,9 +19,9 @@ export default class Scene {
   polygon(x, y, z) {
     this.objects.push(new Polygon(this.project(x), this.project(y), this.project(z)));
   }
-  plane(pos, scale) {
-    this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z-scale.z/2), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2), new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2));
-    this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2), new Vector3(pos.x+scale.x/2, pos.y, pos.z+scale.z/2));
+  plane(pos, rot, scale) {
+    this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z-scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z), new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z));
+    this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z), new Vector3(pos.x+scale.x/2, pos.y, pos.z+scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z));
   }
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
