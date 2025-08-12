@@ -23,6 +23,9 @@ export default class Scene {
     this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z-scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z), new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z));
     this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z), new Vector3(pos.x+scale.x/2, pos.y, pos.z+scale.z/2).rotateX(rot.x).rotateY(rot.y).rotateZ(rot.z));
   }
+  degToRad(x) {
+    return x*(Math.PI/180);
+  }
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.objects.forEach(e => {
