@@ -10,7 +10,7 @@ export default class Scene {
     this.canvas.height = height || window.innerHeight;
     this.ctx = this.canvas.getContext("2d");
     this.cam = new Transform(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0));
-    document.body.appendChild(this.canvas);
+    document.documentElement.appendChild(this.canvas);
     this.draw();
   }
   project(x) {
