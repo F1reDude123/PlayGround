@@ -24,15 +24,16 @@ class Scene {
     this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2), new Vector3(pos.x+scale.x/2, pos.y, pos.z+scale.z/2));
   }
   draw() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.objects.forEach(e => {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.ctx.beginPath();
       this.ctx.moveTo(e.p1.x, e.p1.y);
       this.ctx.lineTo(e.p2.x, e.p2.y);
       this.ctx.lineTo(e.p3.x, e.p3.y);
       this.ctx.lineTo(e.p1.x, e.p1.y);
+      this.ctx.fillStyle = "#000";
       this.ctx.fill();
-      requestAnimationFrame(()=>this.draw());
     });
+    requestAnimationFrame(()=>this.draw());
   }
 }
