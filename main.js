@@ -20,9 +20,17 @@ export default class Scene {
     this.objects.push(new Polygon(this.project(x), this.project(y), this.project(z)));
   }
   plane(pos, rot, scale) {
-    this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z-scale.z/2).rotate(rot), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2).rotate(rot), new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2).rotate(rot));
-    this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2).rotate(rot), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2).rotate(rot), new Vector3(pos.x+scale.x/2, pos.y, pos.z+scale.z/2).rotate(rot));
-  }
+  var verts = [
+    new Vector3(pos.x-scale.x/2, pos.y, pos.z-scale.z/2),
+    new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2),
+    new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2),
+    new Vector3(pos.x+scale.x/2, pos.y, pos.z+scale.z/2)
+  ];
+  var center = verts.reduce((a,b)=>a.add(b), new Vector3(0,0,0)).div(new Vector3(verts.length, verts.length, verts.length));
+  verts = verts.map(v => v.sub(center).rotate(rot).add(center));
+  this.polygon(verts[0], verts[1], verts[2]);
+  this.polygon(verts[2], verts[1], verts[3]);
+}
   degToRad(x) {
     return x*(Math.PI/180);
   }
