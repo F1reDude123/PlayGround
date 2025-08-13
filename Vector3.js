@@ -35,28 +35,18 @@ export default class Vector3 {
     return this;
   }
   rotate(rot) {
-    // rot.x, rot.y, rot.z are in radians
-    const cx = Math.cos(rot.x), sx = Math.sin(rot.x);
-    const cy = Math.cos(rot.y), sy = Math.sin(rot.y);
-    const cz = Math.cos(rot.z), sz = Math.sin(rot.z);
-  
-    // Combined rotation matrix for order X -> Y -> Z  (R = Rz * Ry * Rx)
-    const m00 =  cz*cy;
-    const m01 =  cz*sy*sx - sz*cx;
-    const m02 =  cz*sy*cx + sz*sx;
-  
-    const m10 =  sz*cy;
-    const m11 =  sz*sy*sx + cz*cx;
-    const m12 =  sz*sy*cx - cz*sx;
-  
-    const m20 = -sy;
-    const m21 =  cy*sx;
-    const m22 =  cy*cx;
-  
-    const x = this.x, y = this.y, z = this.z;
-    this.x = m00*x + m01*y + m02*z;
-    this.y = m10*x + m11*y + m12*z;
-    this.z = m20*x + m21*y + m22*z;
+    var y = this.y * Math.cos(rot.x) - this.z * Math.sin(rot.x);
+    var z = this.y * Math.sin(rot.x) + this.z * Math.cos(rot.x);
+    this.y = y;
+    this.z = z;
+    var x = this.x * Math.cos(rot.y) + this.z * Math.sin(rot.y);
+    z = -this.x * Math.sin(rot.y) + this.z * Math.cos(rot.y);
+    this.x = x;
+    this.z = z;
+    x = this.x * Math.cos(rot.z) - this.y * Math.sin(rot.z);
+    y = this.x * Math.sin(rot.z) + this.y * Math.cos(rot.z);
+    this.x = x;
+    this.y = y;
     return this;
   }
 }
