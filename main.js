@@ -38,7 +38,9 @@ export default class Scene {
       this.ctx.closePath();
       this.ctx.fillStyle = "#000";
       this.ctx.fill();
+      this.objects.pop();
     });
+    this.objects=[];
     requestAnimationFrame(()=>this.draw());
   }
 }
