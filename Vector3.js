@@ -35,6 +35,12 @@ export default class Vector3 {
     return this;
   }
   rotateX(x) {
-    return new Vector3(this.x,this.y*Math.cos(x)-this.z*Math.sin(x),this.y*Math.sin(x)+this.z*Math.cos(x));
+    return new Vector3(this.x, this.y*Math.cos(x)-this.z*Math.sin(x), this.y*Math.sin(x)+this.z*Math.cos(x));
+  }
+  rotateY(x) {
+    return new Vector3(this.x*Math.cos(x)+this.z*Math.sin(x), this.y, -this.x*Math.sin(x)+this.z*Math.cos(x));
+  }
+  rotateZ(x) {
+    return new Vector3(this.x*Math.cos(x)-this.y*Math.sin(x), this.x*Math.sin(x)+this.y*Math.cos(x), this.z);
   }
 }
