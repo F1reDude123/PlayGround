@@ -34,7 +34,7 @@ export default class Vector3 {
     this.z=Math.pow(this.z, x.z);
     return this;
   }
-  rotate(x) {
-    return new Vector3(this.x, this.y*Math.cos(x)+this.z*Math.sin(x), -this.y*Math.sin(x)+this.z*Math.cos(x));
+  rotateX(x) {
+    return new Vector3(this.x,this.y*Math.cos(x)-this.z*Math.sin(x),this.y*Math.sin(a)+this.z*Math.cos(x));
   }
 }
