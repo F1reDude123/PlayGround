@@ -20,7 +20,7 @@ export default class Scene {
   polygon(x, y, z) {
     this.objects.push(new Polygon(this.project(x), this.project(y), this.project(z)));
   }
-  plane(t) {
+  plane(t){
     this.polygon(new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z-t.scale.z/2).rotateX(t.rot.x), new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z-t.scale.z/2).rotateX(t.rot.x), new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z+t.scale.z/2).rotateX(t.rot.x));
     this.polygon(new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z-t.scale.z/2).rotateX(t.rot.x), new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z+t.scale.z/2).rotateX(t.rot.x), new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z+t.scale.z/2).rotateX(t.rot.x));
   }
