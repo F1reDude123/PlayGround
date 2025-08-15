@@ -21,8 +21,8 @@ export default class Scene {
     this.objects.push(new Polygon(this.project(x), this.project(y), this.project(z)));
   }
   plane(t){
-    this.polygon(new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z-t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z), new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z-t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z), new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z+t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z));
-    this.polygon(new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z+t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z), new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z-t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z), new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z+t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z));
+    this.polygon(new Vector3(-t.scale.x/2,-t.scale.y/2,-t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(t.scale.x/2,-t.scale.y/2,-t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(-t.scale.x/2,t.scale.y/2,-t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos));
+    this.polygon(new Vector3(t.scale.x/2,-t.scale.y/2,-t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(-t.scale.x/2,t.scale.y/2,-t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(t.scale.x/2,t.scale.y/2,-t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos));
   }
   degToRad(x) {
     return x*(Math.PI/180);
