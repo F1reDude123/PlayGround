@@ -34,19 +34,7 @@ export default class Vector3 {
     this.z=Math.pow(this.z, x.z);
     return this;
   }
-  rotate(rot) {
-    var y = this.y * Math.cos(rot.x) - this.z * Math.sin(rot.x);
-    var z = this.y * Math.sin(rot.x) + this.z * Math.cos(rot.x);
-    this.y = y;
-    this.z = z;
-    var x = this.x * Math.cos(rot.y) + this.z * Math.sin(rot.y);
-    z = -this.x * Math.sin(rot.y) + this.z * Math.cos(rot.y);
-    this.x = x;
-    this.z = z;
-    x = this.x * Math.cos(rot.z) - this.y * Math.sin(rot.z);
-    y = this.x * Math.sin(rot.z) + this.y * Math.cos(rot.z);
-    this.x = x;
-    this.y = y;
-    return this;
+  rotate(x) {
+    return new Vector3(this.x, this.y*Math.cos(x)+this.z*Math.sin(x), this.y*Math.sin(x)+this.z*Math.cos(x));
   }
 }
