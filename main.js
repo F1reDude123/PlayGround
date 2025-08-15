@@ -9,19 +9,20 @@ export default class Scene {
     this.canvas.width = width || window.innerWidth;
     this.canvas.height = height || window.innerHeight;
     this.ctx = this.canvas.getContext("2d");
+    this.fov = 500;
     this.cam = new Transform(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0));
     document.documentElement.appendChild(this.canvas);
     this.draw();
   }
   project(x) {
-    return new Vector2(this.canvas.width/2+x.x/x.z, this.canvas.height/2-x.y/x.z);
+    return new Vector2(this.canvas.width/2+x.x*this.fov/(x.z+this.fov), this.canvas.height/2-x.y*this.fov/(x.z+this.fov));
   }
   polygon(x, y, z) {
     this.objects.push(new Polygon(this.project(x), this.project(y), this.project(z)));
   }
-  plane(pos, rot, scale) {
-    this.polygon(new Vector3(pos.x-scale.x/2, pos.y, pos.z-scale.z/2).rotateX(rot.x), new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2).rotateX(rot.x), new Vector3(pos.x-scale.x/2, pos.y, pos.z+scale.z/2).rotateX(rot.x));
-    this.polygon(new Vector3(pos.x+scale.x/2, pos.y, pos.z-scale.z/2).rotateX(rot.x), new Vector3(pos.x+scale.x/2, pos.y, pos.z+scale.z/2).rotateX(rot.x), new Vector3(pos.x+scale.x/2, pos.y, pos.z+scale.z/2).rotateX(rot.x));
+  plane(t) {
+    this.polygon(new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z-t.scale.z/2).rotateX(t.rot.x), new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z-t.scale.z/2).rotateX(t.rot.x), new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z+t.scale.z/2).rotateX(t.rot.x));
+    this.polygon(new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z-t.scale.z/2).rotateX(t.rot.x), new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z+t.scale.z/2).rotateX(t.rot.x), new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z+t.scale.z/2).rotateX(t.rot.x));
   }
   degToRad(x) {
     return x*(Math.PI/180);
