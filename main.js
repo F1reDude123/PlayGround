@@ -15,14 +15,14 @@ export default class Scene {
     this.draw();
   }
   project(x) {
-    return new Vector2(this.canvas.width/2 + (x.x - this.cam.pos.x)*this.fov/((x.z - this.cam.pos.z)+this.fov), this.canvas.height/2 - (x.y - this.cam.pos.y)*this.fov/((x.z - this.cam.pos.z)+this.fov));
+    return new Vector2(this.canvas.width/2+x.x*this.fov/(x.z+this.fov), this.canvas.height/2-x.y*this.fov/(x.z+this.fov));
   }
   polygon(x, y, z) {
     this.objects.push(new Polygon(this.project(x), this.project(y), this.project(z)));
   }
   plane(t){
-    this.polygon(new Vector3(-t.scale.x/2, -t.scale.y/2, -t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(t.scale.x/2, -t.scale.y/2, -t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(-t.scale.x/2, t.scale.y/2, -t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos));
-    this.polygon(new Vector3(t.scale.x/2, -t.scale.y/2, -t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(-t.scale.x/2, t.scale.y/2, -t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(t.scale.x/2, t.scale.y/2, -t.scale.z/2).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos));
+    this.polygon(new Vector3(-t.scale.x/2, -t.scale.y/2, -t.scale.z/2).add(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z), new Vector3(t.scale.x/2, -t.scale.y/2, -t.scale.z/2).add(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z), new Vector3(-t.scale.x/2, t.scale.y/2, -t.scale.z/2).add(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z));
+    this.polygon(new Vector3(t.scale.x/2, -t.scale.y/2, -t.scale.z/2).add(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z), new Vector3(-t.scale.x/2, t.scale.y/2, -t.scale.z/2).add(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z), new Vector3(t.scale.x/2, t.scale.y/2, -t.scale.z/2).add(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z));
   }
   degToRad(x) {
     return x*(Math.PI/180);
