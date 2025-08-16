@@ -11,7 +11,7 @@ export default class Scene {
     this.ctx = this.canvas.getContext("2d");
     this.fov = 500;
     this.cam = new Transform(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0));
-    document.documentElement.appendChild(this.canvas);
+    document.body.appendChild(this.canvas);
     this.draw();
   }
   project(x) {
@@ -21,8 +21,8 @@ export default class Scene {
     this.objects.push(new Polygon(this.project(x), this.project(y), this.project(z)));
   }
   plane(t){
-    this.polygon(new Vector3(-t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(-t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos));    
-    this.polygon(new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(-t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos));
+    this.polygon(new Vector3(-t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(-t.scale.x/2, 0, t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos));    
+    this.polygon(new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(-t.scale.x/2, 0, t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(t.scale.x/2, 0, t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos));
   }
   degToRad(x) {
     return x*(Math.PI/180);
