@@ -2,6 +2,7 @@ import Vector3 from "https://f1redude123.github.io/PlayGround/Vector3.js";
 import Vector2 from "https://f1redude123.github.io/PlayGround/Vector2.js";
 import Transform from "https://f1redude123.github.io/PlayGround/Transform.js";
 import Polygon from "https://f1redude123.github.io/PlayGround/Polygon.js";
+import { degToRad } from "https://f1redude123.github.io/PlayGround/Utils.js";
 export default class Scene {
   objects = [];
   constructor(width = null, height = null) {
@@ -28,6 +29,10 @@ export default class Scene {
   cube(t) {
     this.plane(new Transform(new Vector3(t.pos.x, t.pos.y-t.scale.y/2, t.pos.z), new Vector3(0, 0, 0), t.scale));
     this.plane(new Transform(new Vector3(t.pos.x, t.pos.y+t.scale.y/2, t.pos.z), new Vector3(0, 0, 0), t.scale));
+    this.plane(new Transform(new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z), new Vector3(0, 0, degToRad(90)), t.scale));
+    this.plane(new Transform(new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z), new Vector3(0, 0, degToRad(90)), t.scale));
+    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y, t.pos.z-t.scale.z/2), new Vector3(0, degToRad(90), degToRad(90)), t.scale));
+    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y, t.pos.z+t.scale.z/2), new Vector3(0, degToRad(90), degToRad(90)), t.scale));
   }
   degToRad(x) {
     return x*(Math.PI/180);
