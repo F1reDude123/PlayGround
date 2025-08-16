@@ -22,7 +22,7 @@ export default class Scene {
   }
   plane(t){
     this.polygon(new Vector3(-t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(-t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos));    
-    this.polygon(new Vector3(t.scale.x/2, 0, -t.scale.z/2)..sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(-t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos));
+    this.polygon(new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(-t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos), new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(t.pos).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(t.pos));
   }
   degToRad(x) {
     return x*(Math.PI/180);
