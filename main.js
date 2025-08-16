@@ -29,10 +29,10 @@ export default class Scene {
   cube(t) {
     this.plane(new Transform(new Vector3(t.pos.x, t.pos.y-t.scale.y/2, t.pos.z), new Vector3(0, 0, 0), t.scale));
     this.plane(new Transform(new Vector3(t.pos.x, t.pos.y+t.scale.y/2, t.pos.z), new Vector3(0, 0, 0), t.scale));
-    this.plane(new Transform(new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z), new Vector3(0, 0, degToRad(90)), t.scale));
-    this.plane(new Transform(new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z), new Vector3(0, 0, degToRad(90)), t.scale));
-    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y, t.pos.z-t.scale.z/2), new Vector3(0, degToRad(90), degToRad(90)), t.scale));
-    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y, t.pos.z+t.scale.z/2), new Vector3(0, degToRad(90), degToRad(90)), t.scale));
+    this.plane(new Transform(new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z), new Vector3(degToRad(90), degToRad(90), 0), t.scale).setPivotPoint(new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z));
+    this.plane(new Transform(new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z), new Vector3(degToRad(90), degToRad(90), 0), t.scale).setPivotPoint(new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z));
+    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y, t.pos.z-t.scale.z/2), new Vector3(degToRad(90), 0, 0), t.scale).setPivotPoint(new Vector3(t.pos.x, t.pos.y, t.pos.z-t.scale.z/2));
+    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y, t.pos.z+t.scale.z/2), new Vector3(degToRad(90), 0, 0), t.scale).setPivotPoint(new Vector3(t.pos.x, t.pos.y, t.pos.z+t.scale.z/2));
   }
   degToRad(x) {
     return x*(Math.PI/180);
