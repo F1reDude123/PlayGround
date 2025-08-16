@@ -26,8 +26,8 @@ export default class Scene {
     this.polygon(new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos), new Vector3(-t.scale.x/2, 0, t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos), new Vector3(t.scale.x/2, 0, t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos));
   }
   cube(t) {
-    this.plane(new Transform(t.pos.sub(new Vector3(0, t.scale.y/2, 0)), new Vector3(0, 0, 0), t.scale));
-    this.plane(new Transform(t.pos.add(new Vector3(0, t.scale.y/2, 0)), new Vector3(0, 0, 0), t.scale));
+    this.plane(new Transform(t.pos.sub(new Vector3(0, t.scale.y, 0)), new Vector3(0, 0, 0), t.scale));
+    this.plane(new Transform(t.pos.add(new Vector3(0, t.scale.y, 0)), new Vector3(0, 0, 0), t.scale));
   }
   degToRad(x) {
     return x*(Math.PI/180);
