@@ -5,7 +5,7 @@ export default class Transform {
     this.pos=pos;
     this.rot=rot;
     this.scale=scale;
-    this.pivot=new Vector3(this.scale.x/2, this.scale.y/2, this.scale.z/2);
+    this.pivot=pos;
   }
   setPivotPoint(x) {
     this.pivot=x;
