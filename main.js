@@ -36,7 +36,6 @@ export default class Scene {
       this.ctx.lineTo(e.p3.x, e.p3.y);
       this.ctx.lineTo(e.p1.x, e.p1.y);
       this.ctx.closePath();
-      this.ctx.fillStyle = "#000";
       this.ctx.fill();
     });
     requestAnimationFrame(()=>this.draw());
