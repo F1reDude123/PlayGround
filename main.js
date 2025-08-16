@@ -15,11 +15,11 @@ export default class Scene {
     document.body.appendChild(this.canvas);
     this.draw();
   }
-  #project(x) {
+  project(x) {
     return new Vector2(this.canvas.width/2+x.x*this.fov/(x.z+this.fov), this.canvas.height/2-x.y*this.fov/(x.z+this.fov));
   }
   polygon(x, y, z, tex = null) {
-    this.objects.push(new Polygon(this.#project(x), this.#project(y), this.#project(z));
+    this.objects.push(new Polygon(this.project(x).sub(this.project(this.cam.pos).rotateX(-this.cam.rot.x).rotateY(-this.cam.rot.y).rotateZ(-this.cam.rot.z)), this.project(y).sub(this.#project(this.cam.pos)).rotateX(-this.cam.rot.x).rotateY(-this.cam.rot.y).rotateZ(-this.cam.rot.z), this.project(z).sub(this.#project(this.cam.pos)).rotateX(-this.cam.rot.x).rotateY(-this.cam.rot.y).rotateZ(-this.cam.rot.z)));
   }
   plane(t) {
     var pivot = new Vector3(t.pivot.x, 0, t.pivot.z);
