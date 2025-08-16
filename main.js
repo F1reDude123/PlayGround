@@ -18,9 +18,7 @@ export default class Scene {
     return new Vector2(this.canvas.width/2+x.x*this.fov/(x.z+this.fov), this.canvas.height/2-x.y*this.fov/(x.z+this.fov));
   }
   polygon(x, y, z, tex = null) {
-    var poly = new Polygon(this.project(x), this.project(y), this.project(z));
-    poly.tex = tex;
-    this.objects.push();
+    this.objects.push(new Polygon(this.project(x), this.project(y), this.project(z)));
   }
   plane(t) {
     var pivot = new Vector3(t.pivot.x, 0, t.pivot.z);
@@ -39,7 +37,6 @@ export default class Scene {
       this.ctx.lineTo(e.p3.x, e.p3.y);
       this.ctx.lineTo(e.p1.x, e.p1.y);
       this.ctx.closePath();
-      this.ctx.fillStyle=e.tex;
       this.ctx.fill();
     });
     requestAnimationFrame(()=>this.draw());
