@@ -19,7 +19,7 @@ export default class Scene {
     return new Vector2(this.canvas.width/2+x.x*this.fov/(x.z+this.fov), this.canvas.height/2-x.y*this.fov/(x.z+this.fov));
   }
   polygon(x, y, z, tex = null) {
-    this.objects.push(new Polygon(this.project(x).sub(this.project(this.cam.pos).rotateX(-this.cam.rot.x).rotateY(-this.cam.rot.y).rotateZ(-this.cam.rot.z)), this.project(y).sub(this.project(this.cam.pos)).rotateX(-this.cam.rot.x).rotateY(-this.cam.rot.y).rotateZ(-this.cam.rot.z), this.project(z).sub(this.#project(this.cam.pos)).rotateX(-this.cam.rot.x).rotateY(-this.cam.rot.y).rotateZ(-this.cam.rot.z)));
+    this.objects.push(new Polygon(this.project(x).sub(this.project(this.cam.pos).rotateX(-this.cam.rot.x).rotateY(-this.cam.rot.y).rotateZ(-this.cam.rot.z)), this.project(y).sub(this.project(this.cam.pos)).rotateX(-this.cam.rot.x).rotateY(-this.cam.rot.y).rotateZ(-this.cam.rot.z), this.project(z).sub(this.project(this.cam.pos)).rotateX(-this.cam.rot.x).rotateY(-this.cam.rot.y).rotateZ(-this.cam.rot.z)));
   }
   plane(t) {
     var pivot = new Vector3(t.pivot.x, 0, t.pivot.z);
