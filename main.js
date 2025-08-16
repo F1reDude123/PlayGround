@@ -11,8 +11,10 @@ export default class Scene {
     this.ctx = this.canvas.getContext("2d");
     this.fov = 500;
     this.cam = new Transform(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0));
-    document.body.appendChild(this.canvas);
-    this.draw();
+    window.onload=function(){
+      document.body.appendChild(this.canvas);
+      this.draw();
+    }
   }
   project(x) {
     return new Vector2(this.canvas.width/2+x.x*this.fov/(x.z+this.fov), this.canvas.height/2-x.y*this.fov/(x.z+this.fov));
