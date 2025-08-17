@@ -13,31 +13,28 @@ export default class Scene {
     this.fov = 500;
     this.cam = new Transform(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0));
     document.body.appendChild(this.canvas);
-    this.draw();
+    this.#draw();
   }
-  project(x) {
+  #project(x) {
     return new Vector2(this.canvas.width/2+x.x*this.fov/(x.z+this.fov), this.canvas.height/2-x.y*this.fov/(x.z+this.fov));
   }
   polygon(x, y, z, tex = null) {
-    this.objects.push(new Polygon(this.project(x), this.project(y), this.project(z)));
+    this.objects.push(new Polygon(this.#project(x), this.#project(y), this.#project(z)));
   }
   plane(t) {
-    var pivot = new Vector3(t.pivot.x, 0, t.pivot.z);
+    var pivot = t.pivot ?? new Vector3(0, 0, 0);
     this.polygon(new Vector3(-t.scale.x/2, 0, -t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos), new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos), new Vector3(-t.scale.x/2, 0, t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos));    
     this.polygon(new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos), new Vector3(-t.scale.x/2, 0, t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos), new Vector3(t.scale.x/2, 0, t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos));
   }
   cube(t) {
     this.plane(new Transform(new Vector3(t.pos.x, t.pos.y+t.scale.y/2, t.pos.z), new Vector3(0, 0, 0), t.scale));
     this.plane(new Transform(new Vector3(t.pos.x, t.pos.y-t.scale.y/2, t.pos.z), new Vector3(0, 0, 0), t.scale));
-    this.plane(new Transform(new Vector3(t.scale.x/2, t.pos.y, t.pos.z), new Vector3(degToRad(90), degToRad(90), 0), t.scale).setPivotPoint(t.pos));
-    this.plane(new Transform(new Vector3(-t.scale.x/2, t.pos.y, t.pos.z), new Vector3(degToRad(90), degToRad(90), 0), t.scale).setPivotPoint(t.pos));
-    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y, t.scale.z/2), new Vector3(degToRad(90), 0, 0), t.scale).setPivotPoint(t.pos));
-    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y, -t.scale.z/2), new Vector3(degToRad(90), 0, 0), t.scale).setPivotPoint(t.pos));
+    this.plane(new Transform(new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z), new Vector3(degToRad(90), degToRad(90), 0), t.scale).setPivotPoint(t.pos));
+    this.plane(new Transform(new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z), new Vector3(degToRad(90), degToRad(90), 0), t.scale).setPivotPoint(t.pos));
+    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y, t.pos.z+t.scale.z/2), new Vector3(degToRad(90), 0, 0), t.scale).setPivotPoint(t.pos));
+    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y, t.pos.z-t.scale.z/2), new Vector3(degToRad(90), 0, 0), t.scale).setPivotPoint(t.pos));
   }
-  degToRad(x) {
-    return x*(Math.PI/180);
-  }
-  draw() {
+  #draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.objects.forEach(e => {
       this.ctx.beginPath();
@@ -48,6 +45,6 @@ export default class Scene {
       this.ctx.closePath();
       this.ctx.fill();
     });
-    requestAnimationFrame(()=>this.draw());
+    requestAnimationFrame(()=>this.#draw());
   }
 }
