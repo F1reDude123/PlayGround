@@ -27,12 +27,47 @@ export default class Scene {
     this.polygon(new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos), new Vector3(-t.scale.x/2, 0, t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos), new Vector3(t.scale.x/2, 0, t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos));
   }
   cube(t) {
-    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y+t.scale.y/2, t.pos.z), new Vector3(0, 0, 0), new Vector3(t.scale.x, 1, t.scale.z)));
-    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y-t.scale.y/2, t.pos.z), new Vector3(0, 0, 0), new Vector3(t.scale.x, 1, t.scale.z)));
-    this.plane(new Transform(new Vector3(t.pos.x+t.scale.x/2, t.pos.y, t.pos.z), new Vector3(degToRad(90), degToRad(90), 0), new Vector3(1, t.scale.y, t.scale.z)).setPivotPoint(t.pos));
-    this.plane(new Transform(new Vector3(t.pos.x-t.scale.x/2, t.pos.y, t.pos.z), new Vector3(degToRad(90), degToRad(90), 0), new Vector3(1, t.scale.y, t.scale.z)).setPivotPoint(t.pos));
-    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y, t.pos.z+t.scale.z/2), new Vector3(degToRad(90), 0, 0), new Vector3(t.scale.x, t.scale.y, 1)).setPivotPoint(t.pos));
-    this.plane(new Transform(new Vector3(t.pos.x, t.pos.y, t.pos.z-t.scale.z/2), new Vector3(degToRad(90), 0, 0), new Vector3(t.scale.x, t.scale.y, 1)).setPivotPoint(t.pos));
+    // Top face (XY plane, Z = +half depth)
+    this.plane(new Transform(
+      new Vector3(t.pos.x, t.pos.y + t.scale.y / 2, t.pos.z),
+      new Vector3(0, 0, 0),
+      new Vector3(t.scale.x, t.scale.z, 0)
+    ));
+  
+    // Bottom face (XY plane, Z = -half depth)
+    this.plane(new Transform(
+      new Vector3(t.pos.x, t.pos.y - t.scale.y / 2, t.pos.z),
+      new Vector3(0, 0, 0),
+      new Vector3(t.scale.x, t.scale.z, 0)
+    ));
+  
+    // Right face (YZ plane, X = +half width)
+    this.plane(new Transform(
+      new Vector3(t.pos.x + t.scale.x / 2, t.pos.y, t.pos.z),
+      new Vector3(0, degToRad(90), 0),
+      new Vector3(t.scale.z, t.scale.y, 0)
+    ));
+  
+    // Left face (YZ plane, X = -half width)
+    this.plane(new Transform(
+      new Vector3(t.pos.x - t.scale.x / 2, t.pos.y, t.pos.z),
+      new Vector3(0, degToRad(90), 0),
+      new Vector3(t.scale.z, t.scale.y, 0)
+    ));
+  
+    // Front face (XZ plane, Y = +half height)
+    this.plane(new Transform(
+      new Vector3(t.pos.x, t.pos.y, t.pos.z + t.scale.z / 2),
+      new Vector3(degToRad(90), 0, 0),
+      new Vector3(t.scale.x, t.scale.y, 0)
+    ));
+  
+    // Back face (XZ plane, Y = -half height)
+    this.plane(new Transform(
+      new Vector3(t.pos.x, t.pos.y, t.pos.z - t.scale.z / 2),
+      new Vector3(degToRad(90), 0, 0),
+      new Vector3(t.scale.x, t.scale.y, 0)
+    ));
   }
   #draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
