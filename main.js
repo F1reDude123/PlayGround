@@ -21,7 +21,36 @@ export default class Scene {
   polygon(x, y, z, tex = null) {
     this.objects.push(new Polygon(this.#project(x), this.#project(y), this.#project(z)));
   }
-  
+  mesh(f, t) {
+    var reader=new FileReader();
+    var mesh;
+    reader.onload=function() {
+      mesh=reader.result;
+    }
+    reader.readAsText(f);
+
+    var verts=[];
+    var faces=[];
+
+    mesh.split("\n").forEach(function(e) {
+      if (e[0]=="v") {
+        verts.push(e.substr(2, e.length));
+      }
+      else if (e[0]=="f") {
+        faces.push(e.substr(2, e.length));
+      }
+    });
+
+    verts.forEach(function(e) {
+      for (var i=0;i<verts.length;i++) {
+        verts[i]=new Vector3(verts[i.split(" ")[0]], verts[i.split(" ")[1]], verts[i.split(" ")[2]]);
+      }
+    });
+
+    faces.forEach(function(e) {
+      this.polygon(e.split(" ")[0], e.split(" ")[1], e.split(" ")[2]);
+    });
+  }
   #draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.objects.forEach(e => {
