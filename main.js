@@ -21,54 +21,7 @@ export default class Scene {
   polygon(x, y, z, tex = null) {
     this.objects.push(new Polygon(this.#project(x), this.#project(y), this.#project(z)));
   }
-  plane(t) {
-    var pivot = t.pivot ?? new Vector3(0, 0, 0);
-    this.polygon(new Vector3(-t.scale.x/2, 0, -t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos), new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos), new Vector3(-t.scale.x/2, 0, t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos));    
-    this.polygon(new Vector3(t.scale.x/2, 0, -t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos), new Vector3(-t.scale.x/2, 0, t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos), new Vector3(t.scale.x/2, 0, t.scale.z/2).sub(pivot).rotateX(t.rot.x).rotateY(t.rot.y).rotateZ(t.rot.z).add(pivot).add(t.pos));
-  }
-  cube(t) {
-    // Top face (XY plane, Z = +half depth)
-    this.plane(new Transform(
-      new Vector3(t.pos.x, t.pos.y + t.scale.y / 2, t.pos.z),
-      new Vector3(0, 0, 0),
-      new Vector3(t.scale.x, t.scale.z, 0)
-    ));
   
-    // Bottom face (XY plane, Z = -half depth)
-    this.plane(new Transform(
-      new Vector3(t.pos.x, t.pos.y - t.scale.y / 2, t.pos.z),
-      new Vector3(0, 0, 0),
-      new Vector3(t.scale.x, t.scale.z, 0)
-    ));
-  
-    // Right face (YZ plane, X = +half width)
-    this.plane(new Transform(
-      new Vector3(t.pos.x + t.scale.x / 2, t.pos.y, t.pos.z),
-      new Vector3(0, degToRad(90), 0),
-      new Vector3(t.scale.z, t.scale.y, 0)
-    ));
-  
-    // Left face (YZ plane, X = -half width)
-    this.plane(new Transform(
-      new Vector3(t.pos.x - t.scale.x / 2, t.pos.y, t.pos.z),
-      new Vector3(0, degToRad(90), 0),
-      new Vector3(t.scale.z, t.scale.y, 0)
-    ));
-  
-    // Front face (XZ plane, Y = +half height)
-    this.plane(new Transform(
-      new Vector3(t.pos.x, t.pos.y, t.pos.z + t.scale.z / 2),
-      new Vector3(degToRad(90), 0, 0),
-      new Vector3(t.scale.x, t.scale.y, 0)
-    ));
-  
-    // Back face (XZ plane, Y = -half height)
-    this.plane(new Transform(
-      new Vector3(t.pos.x, t.pos.y, t.pos.z - t.scale.z / 2),
-      new Vector3(degToRad(90), 0, 0),
-      new Vector3(t.scale.x, t.scale.y, 0)
-    ));
-  }
   #draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.objects.forEach(e => {
