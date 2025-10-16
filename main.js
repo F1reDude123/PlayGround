@@ -23,6 +23,7 @@ export default class Scene {
   }
   mesh(f, t) {
     var reader=new FileReader();
+    var scene=this;
     reader.onload=function() {
       var verts=[];
       var faces=[];
@@ -35,15 +36,15 @@ export default class Scene {
           faces.push(e.substr(2, e.length));
         }
       });
-  
+
+      var idx=0;
       verts.forEach(function(e) {
-        for (var i=0;i<verts.length;i++) {
-          verts[i]=new Vector3(verts[i.split(" ")[0]], verts[i.split(" ")[1]], verts[i.split(" ")[2]]);
-        }
+        verts[idx]=new Vector3(e.split(" ")[0], e.split(" ")[1], e.split(" ")[2]);
+        idx++;
       });
   
       faces.forEach(function(e) {
-        this.polygon(e.split(" ")[0], e.split(" ")[1], e.split(" ")[2]);
+        scene.polygon(e.split(" ")[0], e.split(" ")[1], e.split(" ")[2]);
       });
     }
     reader.readAsText(f);
