@@ -39,12 +39,12 @@ export default class Scene {
 
       var idx=0;
       verts.forEach(function(e) {
-        verts[idx]=new Vector3(e.split(" ")[0], e.split(" ")[1], e.split(" ")[2]);
+        verts[idx]=new Vector3(parseFloat(e.split(" ")[0]), parseFloat(e.split(" ")[1]), parseFloat(e.split(" ")[2]));
         idx++;
       });
   
       faces.forEach(function(e) {
-        scene.polygon(e.split(" ")[0], e.split(" ")[1], e.split(" ")[2]);
+        scene.polygon(verts[e.split(" ")[0]], verts[e.split(" ")[1]], verts[e.split(" ")[2]]);
       });
     }
     reader.readAsText(f);
