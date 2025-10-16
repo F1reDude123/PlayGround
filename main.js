@@ -23,33 +23,30 @@ export default class Scene {
   }
   mesh(f, t) {
     var reader=new FileReader();
-    var mesh;
     reader.onload=function() {
-      mesh=reader.result;
+      var verts=[];
+      var faces=[];
+  
+      reader.result.split("\n").forEach(function(e) {
+        if (e[0]=="v") {
+          verts.push(e.substr(2, e.length));
+        }
+        else if (e[0]=="f") {
+          faces.push(e.substr(2, e.length));
+        }
+      });
+  
+      verts.forEach(function(e) {
+        for (var i=0;i<verts.length;i++) {
+          verts[i]=new Vector3(verts[i.split(" ")[0]], verts[i.split(" ")[1]], verts[i.split(" ")[2]]);
+        }
+      });
+  
+      faces.forEach(function(e) {
+        this.polygon(e.split(" ")[0], e.split(" ")[1], e.split(" ")[2]);
+      });
     }
     reader.readAsText(f);
-
-    var verts=[];
-    var faces=[];
-
-    mesh.split("\n").forEach(function(e) {
-      if (e[0]=="v") {
-        verts.push(e.substr(2, e.length));
-      }
-      else if (e[0]=="f") {
-        faces.push(e.substr(2, e.length));
-      }
-    });
-
-    verts.forEach(function(e) {
-      for (var i=0;i<verts.length;i++) {
-        verts[i]=new Vector3(verts[i.split(" ")[0]], verts[i.split(" ")[1]], verts[i.split(" ")[2]]);
-      }
-    });
-
-    faces.forEach(function(e) {
-      this.polygon(e.split(" ")[0], e.split(" ")[1], e.split(" ")[2]);
-    });
   }
   #draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
