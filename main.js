@@ -44,7 +44,7 @@ export default class Scene {
       });
   
       faces.forEach(function(e) {
-        scene.polygon(verts[parseInt(e.split(" ")[0])-1], verts[parseInt(e.split(" ")[1])-1], verts[parseInt(e.split(" ")[2])-1]));
+        scene.polygon(verts[parseInt(e.split(" ")[0])-1], verts[parseInt(e.split(" ")[1])-1], verts[parseInt(e.split(" ")[2])-1]);
       });
     }
     reader.readAsText(f);
