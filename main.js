@@ -21,13 +21,13 @@ export default class Scene {
     this.objects.push(new Polygon(this.#project(x), this.#project(y), this.#project(z)));
   }
   createBuffer(v) {
-    buffers.push(v);
+    this.buffers.push(v);
   }
   loadBuffer(slot, p, i) {
-    buffers[slot].load(p, i);
+    this.buffers[slot].load(p, i);
   }
   renderBuffer(slot) {
-    this.#draw(buffers[slot].getBufferData());
+    this.#draw(this.buffers[slot].getBufferData());
   }
   #draw(data) {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
