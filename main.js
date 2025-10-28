@@ -2,9 +2,10 @@ import Vector3 from "https://f1redude123.github.io/PlayGround/Vector3.js";
 import Vector2 from "https://f1redude123.github.io/PlayGround/Vector2.js";
 import Transform from "https://f1redude123.github.io/PlayGround/Transform.js";
 import Polygon from "https://f1redude123.github.io/PlayGround/Polygon.js";
-import { degToRad } from "https://f1redude123.github.io/PlayGround/Utils.js";
+import RenderBuffer from "https://f1redude123.github.io/PlayGround/RenderBuffer.js";
+
 export default class Scene {
-  objects = [];
+  buffers = [];
   constructor(width = null, height = null) {
     this.canvas = document.createElement("canvas");
     this.canvas.width = width || window.innerWidth;
@@ -21,37 +22,18 @@ export default class Scene {
   polygon(x, y, z, tex = null) {
     this.objects.push(new Polygon(this.#project(x), this.#project(y), this.#project(z)));
   }
-  mesh(f, t) {
-    var reader=new FileReader();
-    var scene=this;
-    reader.onload=function() {
-      var verts=[];
-      var faces=[];
-  
-      reader.result.split("\n").forEach(function(e) {
-        if (e[0]=="v") {
-          verts.push(e.substr(2, e.length));
-        }
-        else if (e[0]=="f") {
-          faces.push(e.substr(2, e.length));
-        }
-      });
-
-      var idx=0;
-      verts.forEach(function(e) {
-        verts[idx]=new Vector3(parseFloat(e.split(" ")[0]), parseFloat(e.split(" ")[1]), parseFloat(e.split(" ")[2]));
-        idx++;
-      });
-  
-      faces.forEach(function(e) {
-        scene.polygon(verts[parseInt(e.split(" ")[0])-1], verts[parseInt(e.split(" ")[1])-1], verts[parseInt(e.split(" ")[2])-1]);
-      });
-    }
-    reader.readAsText(f);
+  createBuffer(v) {
+    buffers.push(v);
   }
-  #draw() {
+  loadBuffer(slot, p, i) {
+    buffers[slot].load(p, i);
+  }
+  renderBuffer(slot) {
+    this.#draw(buffers[slot].getBufferData());
+  }
+  #draw(data) {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.objects.forEach(e => {
+    data.forEach(e => {
       this.ctx.beginPath();
       this.ctx.moveTo(e.p1.x, e.p1.y);
       this.ctx.lineTo(e.p2.x, e.p2.y);
@@ -60,6 +42,5 @@ export default class Scene {
       this.ctx.closePath();
       this.ctx.fill();
     });
-    requestAnimationFrame(()=>this.#draw());
   }
 }
