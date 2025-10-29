@@ -1,6 +1,6 @@
 import Polygon from "https://f1redude123.github.io/PlayGround/Polygon.js";
 
-class RenderBuffer {
+export default class RenderBuffer {
   vertices=[];
   indices=[];
   load(v, i) {
@@ -10,11 +10,11 @@ class RenderBuffer {
   getBufferData() {
     var data=[];
     var last3=[];
-    for (var i=0;i<vertices.length;i++) {
+    for (var i=0;i<this.vertices.length;i++) {
       if (i%3==0) {
-        data.push(new Polygon(vertices[last3[0]], vertices[last3[1]], vertices[last3[2]]));
+        data.push(new Polygon(this.vertices[last3[0]], this.vertices[last3[1]], this.vertices[last3[2]]));
       }
-      last3.push(indices[i]);
+      last3.push(this.indices[i]);
     }
     return data;
   }
