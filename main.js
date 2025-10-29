@@ -17,9 +17,9 @@ export default class Scene {
   #project(x) {
     return new Vector2(this.canvas.width/2+x.x*this.fov/(x.z+this.fov), this.canvas.height/2-x.y*this.fov/(x.z+this.fov));
   }
-  polygon(x, y, z, tex = null) {
+  /*polygon(x, y, z, tex = null) {
     this.objects.push(new Polygon(this.#project(x), this.#project(y), this.#project(z)));
-  }
+  }*/
   createBuffer(v) {
     this.buffers.push(v);
   }
