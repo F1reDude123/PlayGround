@@ -3,6 +3,7 @@ import Polygon from "https://f1redude123.github.io/PlayGround/Polygon.js";
 export default class RenderBuffer {
   vertices=[];
   indices=[];
+  constructor() {}
   load(v, i) {
     this.vertices=v;
     this.indices=i;
