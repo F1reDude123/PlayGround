@@ -16,19 +16,6 @@ export default class RenderBuffer {
     this.vertices=v;
     this.indices=i;
   }
-
-  rotate(v) {
-    [this.properties.xRot, this.properties.yRot, this.properties.zRot]=[v.x, v.y, v.z];
-  }
-  rotateX(x) {
-    this.properties.xRot=x;
-  }
-  rotateY(y) {
-    this.properties.yRot=y;
-  }
-  rotateZ(z) {
-    this.properties.zRot=z;
-  }
   
   #project(x) {
     return new Vector2(this.scene.canvas.width/2+x.x*this.scene.fov/(x.z+this.scene.fov), this.scene.canvas.height/2-x.y*this.scene.fov/(x.z+this.scene.fov));
