@@ -15,12 +15,8 @@ export default class RenderBuffer {
   }
   getBufferData() {
     var data=[];
-    var last3=[];
-    for (var i=0;i<this.indices.length;i++) {
-      if (i%3==0) {
-        data.push(new Polygon(this.#project(this.vertices[last3[0]]), this.#project(this.vertices[last3[1]]), this.#project(this.vertices[last3[2]])));
-      }
-      last3.push(this.indices[i]);
+    for (var i=0;i<this.indices.length;i+=3) {
+      data.push(new Polygon(this.#project(this.vertices[this.indices[i]]), this.#project(this.vertices[this.indices[i+1]]), this.#project(this.vertices[this.indices[i+2]])));
     }
     return data;
   }
