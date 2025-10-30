@@ -10,17 +10,17 @@ export default class RenderBuffer {
     zRot: 0,
   };
   getBufferProperties={
-    rotate: function(v) {
-      [this.properties.xRot, this.properties.yRot, this.properties.zRot]=[v.x, v.y, v.z];
+    rotate: (v) => {
+      [this.#properties.xRot, this.#properties.yRot, this.#properties.zRot]=[v.x, v.y, v.z];
     },
-    rotateX: function(x) {
-      this.properties.xRot=x;
+    rotateX: (x) => {
+      this.#properties.xRot=x;
     },
-    rotateY: function(y) {
-      this.properties.yRot=y;
+    rotateY: (y) => {
+      this.#properties.yRot=y;
     },
-    rotateZ: function(z) {
-      this.properties.zRot=z;
+    rotateZ: (z) => {
+      this.#properties.zRot=z;
     }
   }
   constructor(s) {
