@@ -14,6 +14,19 @@ export default class RenderBuffer {
     zRot: 0
   };
   getBufferProperties={
+    translate: (v) => {
+      [this.#properties.xTrans, this.#properties.yTrans, this.#properties.zTrans]=[v.x, v.y, v.z];
+    },
+    translateX: (x) => {
+      this.#properties.xTrans=x;
+    },
+    translateY: (y) => {
+      this.#properties.yTrans=y;
+    },
+    translateZ: (z) => {
+      this.#properties.zTrans=z;
+    },
+    
     rotate: (v) => {
       [this.#properties.xRot, this.#properties.yRot, this.#properties.zRot]=[v.x, v.y, v.z];
     },
