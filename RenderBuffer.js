@@ -1,13 +1,17 @@
 import Polygon from "https://f1redude123.github.io/PlayGround/Polygon.js";
 import Vector2 from "https://f1redude123.github.io/PlayGround/Vector2.js";
+import Color from "https://f1redude123.github.io/PlayGround/Color.js";
 
 export default class RenderBuffer {
   vertices=[];
   indices=[];
   #properties={
+    xTrans: 0,
+    yTrans: 0,
+    zTrans: 0,
     xRot: 0,
     yRot: 0,
-    zRot: 0,
+    zRot: 0
   };
   getBufferProperties={
     rotate: (v) => {
@@ -37,9 +41,9 @@ export default class RenderBuffer {
     var data=[];
     for (var i=0;i<this.indices.length;i+=3) {
       data.push(new Polygon(
-        this.#project(this.vertices[this.indices[i]].rotateX(this.#properties.xRot).rotateY(this.#properties.yRot).rotateZ(this.#properties.zRot)),
-        this.#project(this.vertices[this.indices[i+1]].rotateX(this.#properties.xRot).rotateY(this.#properties.yRot).rotateZ(this.#properties.zRot)),
-        this.#project(this.vertices[this.indices[i+2]].rotateX(this.#properties.xRot).rotateY(this.#properties.yRot).rotateZ(this.#properties.zRot))
+        this.#project(this.vertices[this.indices[i]].rotateX(this.#properties.xRot).rotateY(this.#properties.yRot).rotateZ(this.#properties.zRot).add(new Vector3(this.#properties.xTrans, this.#properties.yTrans, this.#properties.zTrans))),
+        this.#project(this.vertices[this.indices[i+1]].rotateX(this.#properties.xRot).rotateY(this.#properties.yRot).rotateZ(this.#properties.zRot).add(new Vector3(this.#properties.xTrans, this.#properties.yTrans, this.#properties.zTrans))),
+        this.#project(this.vertices[this.indices[i+2]].rotateX(this.#properties.xRot).rotateY(this.#properties.yRot).rotateZ(this.#properties.zRot).add(new Vector3(this.#properties.xTrans, this.#properties.yTrans, this.#properties.zTrans)))
       ));
     }
     return data;
