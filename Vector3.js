@@ -5,28 +5,16 @@ export default class Vector3 {
     this.z=z;
   }
   add(x) {
-    this.x+=x.x;
-    this.y+=x.y;
-    this.z+=x.z;
-    return this;
+    return new Vector3(this.x+x.x, this.y+x.y, this.z+x.z);
   }
   sub(x) {
-    this.x-=x.x;
-    this.y-=x.y;
-    this.z-=x.z;
-    return this;
+    return new Vector3(this.x-x.x, this.y-x.y, this.z-x.z);
   }
   mult(x) {
-    this.x*=x.x;
-    this.y*=x.y;
-    this.z*=x.z;
-    return this;
+    return new Vector3(this.x*x.x, this.y*x.y, this.z*x.z);
   }
   div(x) {
-    this.x/=x.x;
-    this.y/=x.y;
-    this.z/=x.z;
-    return this;
+    return new Vector3(this.x/x.x, this.y/x.y, this.z/x.z);
   }
   pow(x) {
     this.x=Math.pow(this.x, x.x);
