@@ -6,20 +6,14 @@ import RenderBuffer from "https://f1redude123.github.io/PlayGround/RenderBuffer.
 
 export default class Scene {
   buffers = [];
-  constructor(width = null, height = null) {
+  constructor(width = null, height = null, parentElement = document.body) {
     this.canvas = document.createElement("canvas");
     this.canvas.width = width || window.innerWidth;
     this.canvas.height = height || window.innerHeight;
     this.ctx = this.canvas.getContext("2d");
     this.fov = 500;
-    document.body.appendChild(this.canvas);
+    parentElement.appendChild(this.canvas);
   }
-  #project(x) {
-    return new Vector2(this.canvas.width/2+x.x*this.fov/(x.z+this.fov), this.canvas.height/2-x.y*this.fov/(x.z+this.fov));
-  }
-  /*polygon(x, y, z, tex = null) {
-    this.objects.push(new Polygon(this.#project(x), this.#project(y), this.#project(z)));
-  }*/
   createBuffer() {
     this.buffers.push(new RenderBuffer(this));
   }
