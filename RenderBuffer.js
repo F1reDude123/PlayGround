@@ -6,27 +6,11 @@ export default class RenderBuffer {
   vertices=[];
   indices=[];
   #properties={
-    xTrans: 0,
-    yTrans: 0,
-    zTrans: 0,
     xRot: 0,
     yRot: 0,
     zRot: 0
   };
   getBufferProperties={
-    translate: (v) => {
-      [this.#properties.xTrans, this.#properties.yTrans, this.#properties.zTrans]=[v.x, v.y, v.z];
-    },
-    translateX: (x) => {
-      this.#properties.xTrans=x;
-    },
-    translateY: (y) => {
-      this.#properties.yTrans=y;
-    },
-    translateZ: (z) => {
-      this.#properties.zTrans=z;
-    },
-    
     rotate: (v) => {
       [this.#properties.xRot, this.#properties.yRot, this.#properties.zRot]=[v.x, v.y, v.z];
     },
@@ -54,9 +38,9 @@ export default class RenderBuffer {
     var data=[];
     for (var i=0;i<this.indices.length;i+=3) {
       data.push(new Polygon(
-        this.#project(this.vertices[this.indices[i]].rotateX(this.#properties.xRot).rotateY(this.#properties.yRot).rotateZ(this.#properties.zRot).add(new Vector3(this.#properties.xTrans, this.#properties.yTrans, this.#properties.zTrans))),
-        this.#project(this.vertices[this.indices[i+1]].rotateX(this.#properties.xRot).rotateY(this.#properties.yRot).rotateZ(this.#properties.zRot).add(new Vector3(this.#properties.xTrans, this.#properties.yTrans, this.#properties.zTrans))),
-        this.#project(this.vertices[this.indices[i+2]].rotateX(this.#properties.xRot).rotateY(this.#properties.yRot).rotateZ(this.#properties.zRot).add(new Vector3(this.#properties.xTrans, this.#properties.yTrans, this.#properties.zTrans)))
+        this.#project(this.vertices[this.indices[i]].rotateX(this.#properties.xRot).rotateY(this.#properties.yRot).rotateZ(this.#properties.zRot)),
+        this.#project(this.vertices[this.indices[i+1]].rotateX(this.#properties.xRot).rotateY(this.#properties.yRot).rotateZ(this.#properties.zRot)),
+        this.#project(this.vertices[this.indices[i+2]].rotateX(this.#properties.xRot).rotateY(this.#properties.yRot).rotateZ(this.#properties.zRot))
       ));
     }
     return data;
