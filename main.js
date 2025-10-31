@@ -35,7 +35,10 @@ export default class Scene {
       this.ctx.lineTo(e.p3.x, e.p3.y);
       this.ctx.lineTo(e.p1.x, e.p1.y);
       this.ctx.closePath();
-      this.ctx.fill();
+      this.ctx.save();
+      this.ctx.clip();
+      this.ctx.drawImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDCSRwJQ2MMmeFKdMtYqkDzv7qjbPjXgZgkw&s", 0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.restore();
     });
   }
 }
