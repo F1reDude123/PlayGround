@@ -15,6 +15,9 @@ export default class Scene {
     parentElement.appendChild(this.canvas);
     this.image=new Image();
     this.image.src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDCSRwJQ2MMmeFKdMtYqkDzv7qjbPjXgZgkw&s";
+    this.image.onload=()=>{
+      this.imageReady=true;
+    };
   }
   createBuffer() {
     this.buffers.push(new RenderBuffer(this));
@@ -29,7 +32,7 @@ export default class Scene {
     this.#draw(this.buffers[slot].getBufferData());
   }
   #draw(data) {
-    if (this.image.complete) {
+    if (this.imageReady) {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       data.forEach(e => {
         this.ctx.beginPath();
