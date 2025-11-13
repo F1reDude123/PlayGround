@@ -13,11 +13,6 @@ export default class Scene {
     this.ctx = this.canvas.getContext("2d");
     this.fov = 500;
     parentElement.appendChild(this.canvas);
-    this.image=new Image();
-    this.image.src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDCSRwJQ2MMmeFKdMtYqkDzv7qjbPjXgZgkw&s";
-    this.image.onload=()=>{
-      this.imageReady=true;
-    };
   }
   createBuffer() {
     this.buffers.push(new RenderBuffer(this));
@@ -32,21 +27,15 @@ export default class Scene {
     this.#draw(this.buffers[slot].getBufferData());
   }
   #draw(data) {
-    if (this.imageReady) {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      data.forEach(e => {
-        this.ctx.beginPath();
-        this.ctx.moveTo(e.p1.x, e.p1.y);
-        this.ctx.lineTo(e.p2.x, e.p2.y);
-        this.ctx.lineTo(e.p3.x, e.p3.y);
-        this.ctx.lineTo(e.p1.x, e.p1.y);
-        this.ctx.closePath();
-        this.ctx.save();
-        this.ctx.clip();
-        this.ctx.drawImage(this.image, 0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.restore();
-      });
-    }
-    
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    data.forEach(e => {
+      this.ctx.beginPath();
+      this.ctx.moveTo(e.p1.x, e.p1.y);
+      this.ctx.lineTo(e.p2.x, e.p2.y);
+      this.ctx.lineTo(e.p3.x, e.p3.y);
+      this.ctx.lineTo(e.p1.x, e.p1.y);
+      this.ctx.closePath();
+      this.ctx.fill();
+    });
   }
 }
